@@ -1,0 +1,22 @@
+{
+  "name": "cruise-ships",
+  "version": "1.0.0",
+  "description": "cruiseships",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/manmarron/cruise-ships.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manmarron/cruise-ships/issues"
+  },
+  "homepage": "https://github.com/manmarron/cruise-ships#readme",
+  "dependencies": {
+    "jest": "^26.0.1"
+  }
+}
