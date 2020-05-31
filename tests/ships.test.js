@@ -1,11 +1,15 @@
-const Ships = require('../src/ships');
-
+const Ships = require('../src/ships.js');
+const Port = require('../src/Port.js');
 
 describe('constructor', () => {
 
-    it('returns if ship is an object', () => {
-        const cruiseShip = new Ships('Titanic')
-        expect(new Ships('Titanic')).toBeInstanceOf(Object);
+    it('returns if ship/port is an object', () => {
+        const port = new Port('Dover');
+        const cruiseShip = new Ships('Titanic', port.name);
+        
+        expect(new Port('Dover')).toBeInstanceOf(Object);
+        expect(cruiseShip.currentPort).toBe('Dover')
+
     });
 
     it('adds a passenger to the ship', () => {
@@ -20,22 +24,15 @@ describe('constructor', () => {
       });
 
     it('define the starting port', () => {
-        portPassedthrough = 'Dublin';
-        const cruiseShip = new Ships('Titanic', portPassedthrough)
-        
-        expect(cruiseShip.port).toEqual(portPassedthrough);
+        const port = new Port('Belfast');
+        const cruiseShip = new Ships('Titanic', port)
+        expect(cruiseShip.currentPort).toEqual(port);
 
-        cruiseShip.addPassengers(15);
-        cruiseShip.Sail();
-        
-        expect(cruiseShip.setSail).toBeTruthy();
-        cruiseShip.dockShip();
-        expect(cruiseShip.setSail).toBeFalsy();
       });
 
       it('set sail', () => {
-        portPassedthrough = 'Dublin';
-        const cruiseShip = new Ships('Titanic', portPassedthrough)
+        const port = new Port('Belfast');
+        const cruiseShip = new Ships('Titanic', port)
         
         cruiseShip.Sail();
         expect(cruiseShip.setSail).toBeTruthy();
@@ -43,11 +40,14 @@ describe('constructor', () => {
       });
 
       it('dock ship', () => {
-        portPassedthrough = 'Dublin';
-        const cruiseShip = new Ships('Titanic', portPassedthrough)
+        const Belfast = new Port('Belfast');
+        const Dover = new Port('Dover');
+        const cruiseShip = new Ships('Titanic', Belfast.name)
         
-        cruiseShip.dockShip();
+        cruiseShip.dock(Dover);
         expect(cruiseShip.setSail).toBeFalsy();
+        console.log(cruiseShip.currentPort.name);
+        expect(cruiseShip.currentPort).toBe('Dover');
       });
 
 });

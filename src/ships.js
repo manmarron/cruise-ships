@@ -1,28 +1,23 @@
 
-function Ships(name, port) {
-    this.name = name;
-    this.passengers = 0;
-    /* create extra class for ports(multiple) */
-    this.port = port;
-    this.status = 'docked';
-    this.setSail = false;
+class Ships {
+    constructor(name, currentPort) {
+        this.name = name;
+        this.passengers = 0;
+        this.status = 'docked';
+        this.setSail = false;
+        this.currentPort = currentPort;
+    };
 
+    dock(port) {
+        this.currentPort = port.name;
+        this.setSail = false;
+    };
+
+    addPassengers(noOfPassengers) {
+        this.passengers += noOfPassengers;
+    }
+    Sail() {
+        this.setSail = true;
+    }
 };
-
-Ships.prototype.addPassengers = function(noOfPassengers) {
-    this.passengers += noOfPassengers;
-};
-
-Ships.prototype.Sail = function() {
-    this.setSail = true;
-    this.port = "";
-};
-
-Ships.prototype.dockShip = function(newPort) {
-    this.setSail = false;
-    this.port = newPort;
-};
-
-
-
 module.exports = Ships
