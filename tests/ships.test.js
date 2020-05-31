@@ -23,10 +23,31 @@ describe('constructor', () => {
         portPassedthrough = 'Dublin';
         const cruiseShip = new Ships('Titanic', portPassedthrough)
         
-        expect(cruiseShip.startingPort).toEqual(portPassedthrough);
-        console.log(cruiseShip.name)
-        console.log(cruiseShip.passengers)
-        console.log(cruiseShip.startingPort)
+        expect(cruiseShip.port).toEqual(portPassedthrough);
+
+        cruiseShip.addPassengers(15);
+        cruiseShip.Sail();
+        
+        expect(cruiseShip.setSail).toBeTruthy();
+        cruiseShip.dockShip();
+        expect(cruiseShip.setSail).toBeFalsy();
+      });
+
+      it('set sail', () => {
+        portPassedthrough = 'Dublin';
+        const cruiseShip = new Ships('Titanic', portPassedthrough)
+        
+        cruiseShip.Sail();
+        expect(cruiseShip.setSail).toBeTruthy();
+
+      });
+
+      it('dock ship', () => {
+        portPassedthrough = 'Dublin';
+        const cruiseShip = new Ships('Titanic', portPassedthrough)
+        
+        cruiseShip.dockShip();
+        expect(cruiseShip.setSail).toBeFalsy();
       });
 
 });
