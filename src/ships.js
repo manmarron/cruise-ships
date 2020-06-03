@@ -1,27 +1,40 @@
 
-class Ships {
-    constructor(name, currentPort) {
+class Ship {
+    constructor(name, itinerary) {
         this.name = name;
         this.passengers = 0;
         this.setSail = false;
-        this.currentPort = currentPort;
+        this.itinerary = itinerary;
+        this.currentPort = itinerary.ports[0];
         this.prevPort = null;
     };
 
-    dock(port) {
-        this.currentPort = port.name;
-
-        this.setSail = false;
+    dock() {
+        const itinerary = this.itinerary;
+        const previousPortIndex = itinerary.ports.indexOf(this.prevPort);
+      
+        this.currentPort = itinerary.ports[previousPortIndex + 1];
     };
 
     addPassengers(noOfPassengers) {
         this.passengers += noOfPassengers;
     }
-    Sail(port) {
-        this.setSail = true;
-        this.prevPort = this.currentPort;
+    Sail() {
+
+        const itinerary = this.itinerary;
+        const currentPortIndex = itinerary.ports.indexOf(this.currentPort);
+      
+        if (currentPortIndex === (itinerary.ports.length - 1)) {
+          throw new Error('End of itinerary reached');
+        }
+      
+        this.previousPort = this.currentPort;
         this.currentPort = null;
-        this.nextPort = port.nextPort;
+
+        this.setSail = true;
+
+
+        
     }
 };
-module.exports = Ships
+module.exports = Ship

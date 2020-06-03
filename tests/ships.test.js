@@ -1,4 +1,4 @@
-const Ships = require('../src/ships.js');
+const Ship = require('../src/ships.js');
 const Port = require('../src/Port.js');
 const Itinerary = require('../src/Itinerary.js');
 
@@ -7,15 +7,18 @@ describe('constructor', () => {
 
     it('returns if ship/port is an object', () => {
         const port = new Port('Dover');
-        const cruiseShip = new Ships('Titanic', port.name);
+        const itinerary = new Itinerary([port])
+        const cruiseShip = new Ship('Titanic', itinerary);
         
-        expect(new Port('Dover')).toBeInstanceOf(Object);
-        expect(cruiseShip.currentPort).toBe('Dover')
+        expect(cruiseShip).toBeInstanceOf(Object);
+        
 
     });
 
     it('adds a passenger to the ship', () => {
-        const cruiseShip = new Ships('Titanic')
+      const port = new Port('Dover');
+      const itinerary = new Itinerary([port])
+        const cruiseShip = new Ship('Titanic', itinerary)
         additionalPassengers = 16;
 
 
@@ -27,51 +30,57 @@ describe('constructor', () => {
 
     it('define the starting port', () => {
         const port = new Port('Belfast');
-        const cruiseShip = new Ships('Titanic', port)
+        const itinerary = new Itinerary([port])
+        const cruiseShip = new Ship('Titanic', itinerary)
         expect(cruiseShip.currentPort).toEqual(port);
 
       });
 
-      xit('set sail', () => {
-        const port = new Port('Belfast');
-        const cruiseShip = new Ships('Titanic', port)
-        
-        cruiseShip.Sail();
-        expect(cruiseShip.setSail).toBeTruthy();
-
-      });
 
       it('dock ship', () => {
-        const Belfast = new Port('Belfast');
-        const Dover = new Port('Dover');
-        const cruiseShip = new Ships('Titanic', Belfast.name)
+        const belfast = new Port('Belfast');
+        const dover = new Port('Dover');
+        const itinerary = new Itinerary([belfast, dover]);
+        const cruiseShip = new Ship('Titanic', itinerary);
         
-        cruiseShip.dock(Dover);
-        expect(cruiseShip.setSail).toBeFalsy();
-        console.log(cruiseShip.currentPort.name);
-        expect(cruiseShip.currentPort).toBe('Dover');
+        cruiseShip.Sail();
+        cruiseShip.dock();
+        expect(cruiseShip.currentPort).toBe(belfast);
+
+       
       });
 
       it('itinerary is object', () => {
-        const itinerary = new Itinerary('Dover');
-        const cruiseShip = new Ships('Titanic', itinerary.nextPort);
+        const port = new Port('Belfast');
+        const itinerary = new Itinerary([port])
+        const cruiseShip = new Ship('Titanic', itinerary);
 
         expect(new Itinerary()).toBeInstanceOf(Object);
 
       });
 
-      it('itinerary - set sail - change prev port to curr port. set next port', () => {
-        const Dover = new Itinerary('Dover');
-        const Belfast = new Itinerary('Belfast');
-        const cruiseShip = new Ships('Titanic', Dover.nextPort);
-
-        cruiseShip.Sail(Belfast);
-        
-        expect(cruiseShip.setSail).toBeTruthy();
-        expect(cruiseShip.nextPort).toBe('Belfast');
+      it('can set sail', () => {
+        const dover = new Port('Dover');
+        const calais = new Port('Calais');
+        const itinerary = new Itinerary([dover, calais]);
+        const cruiseShip = new Ship('Titanic', itinerary);
+      
+        cruiseShip.Sail();
+      
         expect(cruiseShip.currentPort).toBeFalsy();
-        expect(cruiseShip.prevPort).toBe('Dover');
 
+      });
+
+      it('can\'t sail further than its itinerary', () => {
+        const dover = new Port('Dover');
+        const calais = new Port('Calais');
+        const itinerary = new Itinerary([dover, calais]);
+        const cruiseShip = new Ship('Titanic', itinerary);
+      
+        cruiseShip.Sail();
+        cruiseShip.dock();
+      
+        expect(() => cruiseShip.Sail()).toThrowError('End of itinerary reached');
       });
 
 });
