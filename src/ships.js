@@ -5,7 +5,7 @@ class Ships {
         this.passengers = 0;
         this.setSail = false;
         this.currentPort = currentPort;
-        this.prevPort = ''
+        this.prevPort = null;
     };
 
     dock(port) {
@@ -20,8 +20,8 @@ class Ships {
     Sail(port) {
         this.setSail = true;
         this.prevPort = this.currentPort;
-        this.currentPort = false;
-        this.nextPort = port.name;
+        this.currentPort = null;
+        this.nextPort = port.nextPort;
     }
 };
 module.exports = Ships
