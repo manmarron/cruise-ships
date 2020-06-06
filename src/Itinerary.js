@@ -1,6 +1,7 @@
 class Itinerary{
     constructor(port){
         this.ports = port;
+        
     }
 }
 
