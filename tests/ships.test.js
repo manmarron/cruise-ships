@@ -5,20 +5,20 @@ const Itinerary = require('../src/Itinerary.js');
 
 describe('constructor', () => {
 
-    xit('returns if ship/port is an object', () => {
+    it('returns if ship/port is an object', () => {
         const port = new Port('Dover');
         const itinerary = new Itinerary([port])
-        const cruiseShip = new Ship('Titanic', itinerary);
+        const cruiseShip = new Ship(itinerary);
         
         expect(cruiseShip).toBeInstanceOf(Object);
         
 
     });
 
-    xit('adds a passenger to the ship', () => {
+    it('adds a passenger to the ship', () => {
       const port = new Port('Dover');
       const itinerary = new Itinerary([port])
-        const cruiseShip = new Ship('Titanic', itinerary)
+        const cruiseShip = new Ship(itinerary)
         additionalPassengers = 16;
 
 
@@ -28,20 +28,20 @@ describe('constructor', () => {
 
       });
 
-    xit('define the starting port', () => {
+    it('define the starting port', () => {
         const port = new Port('Belfast');
         const itinerary = new Itinerary([port])
-        const cruiseShip = new Ship('Titanic', itinerary)
+        const cruiseShip = new Ship(itinerary)
         expect(cruiseShip.currentPort).toEqual(port);
 
       });
 
 
-      xit('dock ship', () => {
+      it('dock ship', () => {
         const belfast = new Port('Belfast');
         const dover = new Port('Dover');
         const itinerary = new Itinerary([belfast, dover]);
-        const cruiseShip = new Ship('Titanic', itinerary);
+        const cruiseShip = new Ship(itinerary);
         
         cruiseShip.Sail();
         cruiseShip.dock();
@@ -50,12 +50,12 @@ describe('constructor', () => {
        
       });
 
-      xit('itinerary is object', () => {
+      it('itinerary is object', () => {
         const port = new Port('Belfast');
         const itinerary = new Itinerary([port])
-        const cruiseShip = new Ship('Titanic', itinerary);
+        const cruiseShip = new Ship(itinerary);
 
-        expect(new Itinerary()).toBeInstanceOf(Object);
+        expect(new Itinerary([port])).toBeInstanceOf(Object);
 
       });
 
@@ -75,7 +75,7 @@ describe('constructor', () => {
         const dover = new Port('Dover');
         const calais = new Port('Calais');
         const itinerary = new Itinerary([dover, calais]);
-        const cruiseShip = new Ship('Titanic', itinerary);
+        const cruiseShip = new Ship(itinerary);
       
         cruiseShip.Sail();
         cruiseShip.dock();
@@ -83,7 +83,7 @@ describe('constructor', () => {
         expect(() => cruiseShip.Sail()).toThrowError('End of itinerary reached');
       });
 
-      xit('add ship to a port', () => {
+      it('add ship to a port', () => {
         const port = new Port('Dover');
         const cruiseShip = {};
 
@@ -93,7 +93,7 @@ describe('constructor', () => {
         
       });
 
-      xit('remove ship from a port', () => {
+      it('remove ship from a port', () => {
         const port = new Port('Dover');
         const cruiseShip = {};
         const queenMary = {};
@@ -108,10 +108,10 @@ describe('constructor', () => {
       });
 
 
-      xit('gets added to port on instantiation', () => {
+      it('gets added to port on instantiation', () => {
         const dover = new Port('Dover');
         const itinerary = new Itinerary([dover]);
-        const cruiseShip = new Ship('Titanic', itinerary);
+        const cruiseShip = new Ship(itinerary);
 
         expect(dover.shipDocked).toContain(cruiseShip);
       });
