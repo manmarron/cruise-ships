@@ -53,6 +53,7 @@ describe('constructor', () => {
     ship = new Ship(itinerary);
     queenMary = {};
     titanic = {};
+    
   });
 
 
