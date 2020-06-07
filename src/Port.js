@@ -1,15 +1,16 @@
-var ships = [];
+
 class Port{
     constructor(portName){
         this.name = portName;
-        this.shipDocked = ships;
+        this.shipDocked = [];
     }
     addShip(ship) {
-        ships.push(ship)
-        this.shipDocked = ships;
+      
+        this.shipDocked.push(ship)
     }
     removeShip(ship){
-        this.shipDocked = ships.filter(item => item == ship);
+        this.shipDocked = this.shipDocked.filter(item => item !== ship);
+       
     }
 };
 
